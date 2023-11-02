@@ -1,0 +1,33 @@
+[
+    {
+      "id": 1,
+      "username": "Mega Watt",
+      "handle": "@MegaWatt",
+      "timeAgo": "4h",
+      "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laborum nostrum, quod blanditiis nihil distinctio quibusdam. Natus voluptate ipsa explicabo!",
+      "likes": 300,
+      "replies": 700,
+      "userAvatar": "https://www.shutterstock.com/image-vector/avatar-hacker-man-260nw-481229251.jpg"
+    },
+    {
+        "id": 1,
+        "username": "Mega Watt",
+        "handle": "@MegaWatt",
+        "timeAgo": "4h",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laborum nostrum, quod blanditiis nihil distinctio quibusdam. Natus voluptate ipsa explicabo!",
+        "likes": 300,
+        "replies": 700,
+        "userAvatar": "https://www.shutterstock.com/image-vector/avatar-hacker-man-260nw-481229251.jpg"
+      },
+      {
+        "id": 1,
+        "username": "Mega Watt",
+        "handle": "@MegaWatt",
+        "timeAgo": "4h",
+        "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque laborum nostrum, quod blanditiis nihil distinctio quibusdam. Natus voluptate ipsa explicabo!",
+        "likes": 300,
+        "replies": 700,
+        "userAvatar": "https://www.shutterstock.com/image-vector/avatar-hacker-man-260nw-481229251.jpg"
+      }
+  ]
+  
