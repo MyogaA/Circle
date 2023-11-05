@@ -13,7 +13,7 @@ export class Thread {
     @Column({ nullable: true })
     content: string
 
-    @Column({ nullable: true })
+    @Column({ nullable: false })
     image: string
 
     @ManyToOne(() => User, (user) => user.threads)
@@ -24,5 +24,5 @@ export class Thread {
     likes: Like[];
 
     @OneToMany(() => Reply, (reply) => reply.thread)
-    reply: Reply[]
+    replies: Reply[]
 }

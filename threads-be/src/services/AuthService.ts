@@ -84,6 +84,7 @@ export default new class AuthSrevice {
                 where: {
                     id: loginSession.user.id
                 },
+                relations: ["following", "followers"],
             })
 
             return res.status(200).json({user, message: "success"})

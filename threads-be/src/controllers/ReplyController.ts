@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import ReplyService from "../services/Reply"
+import ReplyService from "../services/ReplyService"
 
 
 export default new class ReplyController{
@@ -7,6 +7,15 @@ export default new class ReplyController{
         ReplyService.create(req, res)
         console.log(req);
         
+    }
+    find(req: Request, res: Response) {
+        ReplyService.find(req, res)
+    }
+    findOne(req: Request, res: Response) {
+        ReplyService.findOne(req, res)
+    }
+    delete(req: Request, res: Response) {
+        ReplyService.delete(req, res)
     }
 
 }

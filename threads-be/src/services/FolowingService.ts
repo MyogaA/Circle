@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm';
-import { Follow } from '../entities/Follow';
 import { AppDataSource } from '../data-source';
-import { followingSchema } from '../utils/valid';
 import { Request, Response } from 'express';
+import { Follow } from '../entities/Follow';
+import { followingSchema } from '../utils/valid';
 
 export default new (class FollowingServices {
   private readonly FollowingRepository: Repository<Follow> = AppDataSource.getRepository(Follow);
@@ -10,7 +10,7 @@ export default new (class FollowingServices {
   async find(req: Request, res: Response): Promise<Response> {
     try {
       const following = await this.FollowingRepository.find({
-        relations: [ 'followingToUser'],
+        relations: ['followers',  'users'],
       });
       return res.status(200).json(following);
     } catch (err) {
@@ -27,12 +27,34 @@ export default new (class FollowingServices {
         return res.status(400).json({ Error: error.details[0].message });
       }
 
-      const following = this.FollowingRepository.create({
-        followingToUser: value.followingToUser
+      const loginSession = res.locals.loginSession;
+      console.log(loginSession);
+      
+      const followingSelected: Follow = await this.FollowingRepository.findOne({
+        where: {
+          userId: {
+            id: loginSession.user.id,
+          },
+          followers: {
+            id: value.followers,
+          },
+        },
       });
 
-      const createLikes = await this.FollowingRepository.save(following);
-      res.status(200).json(createLikes);
+      if (followingSelected) {
+        await this.FollowingRepository.remove(followingSelected);
+        return res.status(200).json({ message: 'Following remove' });
+      }
+
+      const following = this.FollowingRepository.create({
+        followers: value.followers,
+        userId: {
+          id: loginSession.user.id,
+        },
+      });
+
+      const createFollowing = await this.FollowingRepository.save(following);
+      res.status(200).json(createFollowing);
     } catch (err) {
       return res.status(500).json({ error: 'Error while creating following' });
     }

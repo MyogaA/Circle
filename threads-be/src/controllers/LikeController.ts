@@ -1,17 +1,16 @@
-import { Request, Response } from "express"
-import LikeService from "../services/LikeService"
+import { Request, Response } from "express";
+import LikeService from "../services/LikeService";
 
+export default new (class LikesControllers {
+    // find(req: Request, res: Response) {
+    //     LikeService.find(req, res)
+    // }
 
-export default new class LikeController{
     create(req: Request, res: Response) {
         LikeService.create(req, res)
-        console.log(req);
-        
-    }
-    delete(req: Request, res: Response) {
-        LikeService.delete(req, res)
-        console.log(req);
-        
     }
 
-}
+    delete(req: Request, res: Response) {
+        LikeService.delete(req, res)
+    }
+})

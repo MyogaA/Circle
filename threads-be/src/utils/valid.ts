@@ -11,14 +11,15 @@ export const createUserSchema = Joi.object({
   full_name: Joi.string(),
   email: Joi.string(),
   password: Joi.string(),
+  bio: Joi.string().allow('', null),
 
 });
 
 export const createRepliesSchema = Joi.object({
-  image: Joi.string().required(),
-  content: Joi.string().required(),
-  userId: Joi.number(),
-  threadId: Joi.number()
+  image: Joi.string(),
+  content: Joi.string(),
+  user: Joi.number(),
+  thread: Joi.number()
 })
 
 export const createLikesSchema = Joi.object({

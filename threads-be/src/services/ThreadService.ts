@@ -13,7 +13,7 @@ export default new class ThreadServices {
   async find(req: Request, res: Response) : Promise<Response> {
     try {
       const threads = await this.threadRepository.find({
-        relations: ["users", "likes","likes.user"],
+        relations: ["users", "likes","likes.user","replies","replies.user"],
         order: {
           id: "DESC",
         }
@@ -36,9 +36,9 @@ export default new class ThreadServices {
 
   async findOne(req: Request, res: Response) : Promise<Response> {
     try {
-      const id = parseInt(req.params.id, 10);
+      const id = Number(req.params.id);
       const thread = await this.threadRepository.findOne({
-        relations: ["users"],
+        relations: ["users", "likes","likes.user","replies","replies.user"],
         where: {
           id: id,
         },
@@ -52,13 +52,13 @@ export default new class ThreadServices {
 
   async create(req: Request, res: Response): Promise<Response> {
     try {
-      const user = res.locals.loginSession;
+      const user = res.locals.loginSession.user.id;
       const image = req?.file.path;
       const data = {
         content: req.body.content,
         image,
       };
-      console.log(user);
+      console.log(data);
       
       const { error } = updateThreadSchema.validate(data);
       if (error) {
@@ -67,9 +67,7 @@ export default new class ThreadServices {
       const thread = this.threadRepository.create({
         content: data.content,
         image: image,
-        users: {
-          id: user.user.id,
-        },
+        users: res.locals.loginSession.user.id,
       });
   
       const createdThread = await this.threadRepository.save(thread);

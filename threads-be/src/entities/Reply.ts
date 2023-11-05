@@ -3,7 +3,7 @@ import { User } from './User';
 import { Thread } from './Threads';
 
 
-@Entity()
+@Entity({ name: 'replies' })
 export class Reply {
   @PrimaryGeneratedColumn()
   id: number;
@@ -14,6 +14,9 @@ export class Reply {
   @ManyToOne(() => User, (user) => user.reply)
   user: User;
 
-  @ManyToOne(() => Thread, (thread) => thread.reply)
+  @ManyToOne(() => Thread, (thread) => thread.replies)
   thread: Thread;
+
+  @Column()
+  image: string;
 }

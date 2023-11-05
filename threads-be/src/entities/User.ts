@@ -1,8 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable, JoinColumn } from "typeorm"
-import { Thread } from "./Threads"
-import { Like } from "./Like"
-import { Reply } from "./Reply"
-import { Follow } from "./Follow"
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, ManyToMany, JoinTable } from "typeorm";
+import { Thread } from "./Threads";
+import { Like } from "./Like";
+import { Reply } from "./Reply";
 
 @Entity({name: "users"})
 export class User {
@@ -28,26 +27,43 @@ export class User {
     @Column({nullable:true})
     profile_description: string
 
-    @OneToMany(() => Thread,(thread) => thread.users)
+    @OneToMany(() => Thread, (thread) => thread.users)
     threads: Thread[];
 
     @OneToMany(() => Like, (like) => like.user)
     likes: Like[];
 
-    @OneToMany(() => Reply, (reply) => reply.user)
-    reply: Reply[]; 
-    
-    @OneToMany(() => Follow, (follow) => follow.followingToUser,{
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
-    })
-    @JoinColumn()
-    followingToUser: Follow[]; 
+    @OneToMany(() => Reply, (replies) => replies.user)
+    reply: Reply[];
 
-    @OneToMany(() => Follow, (follow) => follow.followerToUser,{
-        onUpdate: "CASCADE",
-        onDelete: "CASCADE"
+    @Column({nullable: true})
+    bio: string;
+
+    @ManyToMany(() => User, (user) => user.following)
+    @JoinTable({
+      name: "followers",
+      joinColumn: {
+        name: "follower_id",
+        referencedColumnName: "id",
+      },
+      inverseJoinColumn: {
+        name: "following_id",
+        referencedColumnName: "id",
+      },
     })
-    @JoinColumn()
-    followerToUser: Follow[]; 
+    followers: User[];
+
+    @ManyToMany(() => User, (user) => user.followers)
+    @JoinTable({
+      name: "followers",
+      joinColumn: {
+        name: "following_id",
+        referencedColumnName: "id",
+      },
+      inverseJoinColumn: {
+        name: "follower_id",
+        referencedColumnName: "id",
+      },
+    })
+    following: User[];
 }
