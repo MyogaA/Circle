@@ -1,6 +1,6 @@
 import { setAuthToken } from "../../libs/api";
-import { IUser } from "../../types/user";
 import { createSlice } from "@reduxjs/toolkit";
+import { IUser } from "../types/user";
 
 const initiaslState: IUser = {
   id: 0,
@@ -9,7 +9,8 @@ const initiaslState: IUser = {
   email: "",
   picture: "",
   following: [],
-  followers:[]
+  followers: [],
+  bio: '',
 }
 
 export const authSlice = createSlice({
@@ -29,6 +30,8 @@ export const authSlice = createSlice({
         email: payload.user.email,
         picture: payload.user.picture,
         following: payload.user.following,
+        followers: payload.user.followers,
+        bio: payload.user.bio,
       }
       // localStorage.setItem("user", JSON.stringify(user));
       console.log();
@@ -47,6 +50,9 @@ export const authSlice = createSlice({
         username: payload.username,
         email: payload.email,
         picture: payload.picture,
+        following: payload.following,
+        followers: payload.followers,
+        bio: payload.bio
       }
 
       return user

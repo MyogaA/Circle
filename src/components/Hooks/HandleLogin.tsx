@@ -2,8 +2,8 @@ import { useState, ChangeEvent } from "react";
 import {API}  from "../../libs/api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { IUserlogin } from "../../types/user";
 import { AUTH_CHECK, AUTH_LOGIN } from "../../Store/store";
+import { IUserlogin } from "../../Store/types/user";
 
 export function useLogin() {
   const navigate = useNavigate();

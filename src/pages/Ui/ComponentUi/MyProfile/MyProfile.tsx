@@ -1,7 +1,9 @@
 import {Grid, GridItem } from "@chakra-ui/react";
-import   Post  from "./Post";
-import { Sidebar } from "./Sidebar";
-import { Navbar } from "./Navbar";
+import { Navbar } from "../Navbar/Navbar";
+import { Sidebar } from "../Sidebar/Sidebar";
+import FormProfile from "./FormProfile";
+import YourProfile from "./ProfileUi";
+
 
   
 export default function Thread() {
@@ -15,10 +17,10 @@ export default function Thread() {
   <GridItem p={3} position={"fixed"} borderRight={"1px"} height={"full"} borderColor={"white"} gridArea="1 / 1 / 7 / 2">
   <Navbar/>
   </GridItem>
-  <GridItem p={3} gridArea="1 / 2 / 6 / 5"style={{ overflow: "auto" }}>
-  <Post />
+  <GridItem p={3} gridArea="1 / 2 / 6 / 5"style={{ overflow: "hidden" }}>
+    <YourProfile/>
   </GridItem>
-  <GridItem  m={3} p={3} borderLeft={"1px"} height={"full"} color={"white"} gridArea="1 / 5 / 7 / 7">
+  <GridItem w={"full"}  m={3} p={3} borderLeft={"1px"} height={"full"} color={"white"} gridArea="1 / 5 / 7 / 7">
   <Sidebar />
 </GridItem>
 </Grid>

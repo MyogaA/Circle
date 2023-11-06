@@ -5,10 +5,15 @@ import { ChakraProvider, Spinner, extendTheme } from "@chakra-ui/react"
 import { Routes, Route, Navigate, Outlet, useNavigate } from "react-router-dom"
 import { AUTH_CHECK, AUTH_ERROR, RootState } from "./Store/store"
 import { API, setAuthToken } from "./libs/api"
-import Thread from "./pages/Ui/threads"
-import Register from "./pages/RegisterLogin/Register"
-import Login from "./pages/RegisterLogin/LoginForm"
-import Follow from "./pages/Ui/Follow"
+import Register from "./components/RegisterLogin/Register"
+import Login from "./components/RegisterLogin/LoginForm"
+import Reply from "./pages/Ui/ComponentUi/Replies/Reply"
+import Thread from "./pages/Ui/ComponentUi/threads"
+import Follow from "./pages/Ui/ComponentUi/Sidebar/Follow"
+import Search from "./pages/Ui/ComponentUi/Search/Search"
+import MyProfile from "./pages/Ui/ComponentUi/MyProfile/MyProfile"
+import YourProfile from "./pages/Ui/ComponentUi/MyProfile/ProfileUi"
+import EditProfile from "./pages/Ui/ComponentUi/MyProfile/FormProfile"
 
 
 
@@ -28,7 +33,7 @@ const theme = extendTheme({
 // setAuthToken => apakah sudah token ? akses : login/register
 function App() {
   const auth = useSelector((state: RootState) => state.auth)
-  // console.log(auth);
+  console.log(auth);
   
 
   const [isLoading, setIsLoading] = useState<boolean>(true)
@@ -105,13 +110,19 @@ function App() {
           <Routes>
             <Route path="/" element={<IsNotLogin />}>
               <Route path="/"element={<Thread/>}/>
-              <Route path="/Follow" element={<Follow item={auth} />} />
+              <Route path="/Follow" element={<Follow  />} />
             </Route> 
             
            
               <Route path="/auth/register" element={ <Register />} />
               <Route path="/auth/login" element={<Login />} />
-              <Route path="/Follow" element={<Follow item={undefined} />} />
+              <Route path="/Follow" element={<Follow  />} />
+              <Route path="/ReplyDetail/:id" element={<Reply  />} />
+              <Route path="/SearchUser/" element={<Search  />} />
+              <Route path="/MyProfile/" element={<MyProfile  />} />
+              <Route path="/YourProfile/" element={<YourProfile  />} />
+              <Route path="/EditProfile/" element={<EditProfile  />} />
+              <Route path="/" element={<Thread  />} />
           </Routes>
         </ChakraProvider>
       }

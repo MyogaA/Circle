@@ -11,9 +11,11 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { ImagePlus, MessageSquare, Dot } from "lucide-react";
-import PostHooks from "./component/Hooks/PostHooks";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { BiLogOutCircle } from "react-icons/bi";
+import PostHooks from "../../Hooks/Post/PostHooks";
+import { Link } from 'react-router-dom';
+
 // import { useDispatch } from "react-redux";
 // import { AUTH_LOGOUT } from "../../Store/store";
 // // import { useNavigate } from 'react-router-dom';
@@ -42,7 +44,7 @@ export default function Post(props: any) {
           Home
         </Heading>
         <Flex onClick={handleLogout} style={{ cursor: "pointer" }}>
-        <BiLogOutCircle color="red" size="30px" />
+          <BiLogOutCircle color="red" size="30px" />
         </Flex>
         Logout
       </Box>
@@ -110,14 +112,18 @@ export default function Post(props: any) {
                 {postItem.content}
               </Text>
               <Box display="flex">
-              <Flex gap={2}alignItems="center" cursor="pointer" mt={2} onClick={() => handleLike(postItem.id, postItem.users.id,!isLiked)}>
-            {isLiked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="white"/>}
-            <Text color={"white"} fontSize="sm">{postItem.likes?.length || 0}</Text>
-          </Flex>
+                <Flex gap={2} alignItems="center" cursor="pointer" mt={2} onClick={() => handleLike(postItem?.id, postItem?.users?.id, isLiked, postItem?.thread?.id)}>
+                  {isLiked ? <AiFillHeart size={30} color="red" /> : <AiOutlineHeart size={30} color="white" />}
+                  <Text color="white" fontSize="sm">{postItem?.likes?.length || 0}</Text>
+                </Flex>
                 <Box display="flex" fontSize="sm" mt={3} ml={5} color="white">
-                  <MessageSquare />
-                  <Text ml={2} color="white" fontSize="sm">
-                    {postItem.reply?.length || 0} Balasan
+                  <Link to={`/ReplyDetail/${postItem.id}`}>
+                    <Button colorScheme="transparent">
+                    <MessageSquare />
+                    </Button>
+                  </Link>
+                  <Text mt={2} color="white" fontSize="sm">
+                    {postItem?.replies?.length || 0} Balasan
                   </Text>
                 </Box>
               </Box>

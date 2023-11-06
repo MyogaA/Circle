@@ -4,10 +4,25 @@ export type IUser = {
     username?: string;
     email?: string;
     picture?: string;
-    following?: [] | undefined;
-    followers?: [] | undefined;
+    following?: Following[];
+    followers?: [];
+    bio?: string;
+
   }
-  
+  export type Following = {
+    id: number;
+    full_name?: string;
+    username?: string;
+    user: {
+      id: number;
+    };
+  };
+  export type follow = {
+    id: number;
+    user: {
+      id: number;
+    };
+  };
   export type IUserRegister = {
     full_name: string;
     username: string;

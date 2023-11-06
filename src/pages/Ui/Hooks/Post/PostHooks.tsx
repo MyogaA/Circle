@@ -1,10 +1,9 @@
-import { API } from "../../../../libs/api";
 import { useQuery } from "react-query";
 import { useState, useRef, ChangeEvent, FormEvent, useEffect } from "react";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { AUTH_LOGOUT, RootState } from "../../../../Store/store";
 import { useDispatch } from "react-redux";
-
+import { AUTH_LOGOUT, RootState } from "../../../../Store/store";
+import { API } from "../../../../libs/api";
 export interface User {
     id?: number | undefined;
     username?: string;
@@ -15,24 +14,19 @@ export interface User {
     profile_description?: string;
   }
   
-  export interface Replies {
-    id?: number | undefined;
-    content?: string;
-    image?: string;
-    user?: User;
-  }
+
   
 interface Post {
     id?: number;
     content: string;
     image?: Blob | string;
     users?: User;
-    reply?: Replies [];
+    // reply?: Replies [];
     likes?: User[];
   }
 export default function PostHooks(props: Post) {
 
-    const { id, content, image, likes, reply } = props;
+    const { id, content, image, likes } = props;
     const user_id = useSelector((state: RootState) => state.auth?.id);
     const [post, setPost] = useState<Post>({
     id,
@@ -40,7 +34,7 @@ export default function PostHooks(props: Post) {
     image,
     users: props.users,
     likes,
-    reply, 
+    // reply, 
   });
 
   const [isLiked, setIsLiked] = useState<boolean | undefined>(false);
@@ -54,20 +48,26 @@ export default function PostHooks(props: Post) {
     }
 }, [likes])
     
-const handleLike = (id: number | undefined, user_id: number | undefined, isLiked: boolean | undefined) => {
-    console.log(user_id, id, isLiked);
-  
-    API.post(`/like/${id}`, {
-      user_id: user_id,
-      action: isLiked, 
+const handleLike = (
+  id: number | undefined,
+  user_id: number | undefined,
+  isLiked: boolean | undefined,
+  threadId: number | undefined
+) => {
+  const action = isLiked ? "dislike" : "like";
+  API.post(`/like/${id}`, {
+    user_id: user_id,
+    action: action,
+    thread_id: threadId,
+  })
+    .then(() => {
+      // Update isLiked state
+      setIsLiked((prevIsLiked) => !prevIsLiked);
     })
-      .then(() => {
-        setIsLiked(!isLiked); 
-      })
-      .catch((error) => {
-        console.error("Error liking the post:", error);
-      });
-  };
+    .catch((error) => {
+      console.error("Error liking/disliking the post:", error);
+    });
+};
   
   
   const { data: getPosts, refetch, isLoading, isError } = useQuery<Post[]>(
@@ -144,4 +144,3 @@ const handleLogout = () => {
     handlePost, handleChange, handlePostClick, handleLike,  fileInputRef, getPosts, isLoading, isError,isLiked,handleLogout
   };
 }
-
