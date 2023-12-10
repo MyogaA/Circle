@@ -1,4 +1,4 @@
-import * as express from 'express'
+import express from 'express'
 import { AppDataSource } from "./data-source"
 import router from './route'
 
