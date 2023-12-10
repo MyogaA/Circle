@@ -34,8 +34,8 @@
    },
    "scripts": {
       "worker": "nodemon src/Worker/index.ts",
-      "start": "nodemon src/index.ts",
-      "build": "netlify deploy --prod",
+      "start": "node src/index.ts",
+      "build": "tsc",
       "typeorm": "typeorm-ts-node-commonjs",
       "migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/migration/threads-migration -d src/data-source.ts",
       "migration:run": "npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
