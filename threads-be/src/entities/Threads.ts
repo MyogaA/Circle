@@ -13,7 +13,7 @@ export class Thread {
     @Column({ nullable: true })
     content: string
 
-    @Column({ nullable: false })
+    @Column({ nullable: true })
     image: string
 
     @ManyToOne(() => User, (user) => user.threads)

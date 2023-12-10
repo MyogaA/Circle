@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import ThreadServices from "../services/ThreadService";
-import ThreadQueue from "../queque/queque";
+// import ThreadQueue from "../queque/queque";
 
 export default new class ThreadControllers {
   find(req: Request, res: Response) {
@@ -12,7 +12,7 @@ export default new class ThreadControllers {
   }
   
   create(req: Request, res: Response) {
-    ThreadQueue.create(req, res)
+    ThreadServices.create(req, res)
   }
   
   update(req: Request, res: Response) {
