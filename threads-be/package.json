@@ -5,7 +5,7 @@
    "engines": {
       "node": "18.x"
    },
-   "type": "commonjs",
+   "type": "module",
    "devDependencies": {
       "@types/amqplib": "^0.10.4",
       "@types/bcrypt": "^5.0.1",
@@ -35,7 +35,7 @@
    "scripts": {
       "worker": "nodemon src/Worker/index.ts",
       "start": "node src/index.ts",
-      "build": "vercel build --prod",
+      "build": "tsc",
       "typeorm": "typeorm-ts-node-commonjs",
       "migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/migration/threads-migration -d src/data-source.ts",
       "migration:run": "npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
