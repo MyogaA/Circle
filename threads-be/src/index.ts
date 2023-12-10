@@ -1,4 +1,5 @@
 import express from 'express'
+import cors from 'cors'
 import { AppDataSource } from "./data-source"
 import router from './route'
 
@@ -8,6 +9,7 @@ AppDataSource.initialize()
         const port = 5002
         const body = require('body-parser')
         app.use(body.urlencoded({ extended: true })) 
+        app.use(cors())
         app.use(express.json())
         app.use("/api/v1", router) 
 
