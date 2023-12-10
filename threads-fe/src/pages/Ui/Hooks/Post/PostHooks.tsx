@@ -124,7 +124,7 @@ const dispatch = useDispatch();
 // const navigate = useNavigate();
 
 
-const [LogOut, setLogout] = useState(false);
+const [, setLogout] = useState(false);
 const handleLogout = () => {
   dispatch(AUTH_LOGOUT());
   setLogout(true);
