@@ -2,6 +2,9 @@
    "name": "threads",
    "version": "0.0.1",
    "description": "Awesome project developed with TypeORM.",
+   "engines": {
+      "node": "16.x"
+   },
    "type": "commonjs",
    "devDependencies": {
       "@types/amqplib": "^0.10.4",
@@ -31,7 +34,7 @@
    },
    "scripts": {
       "worker": "nodemon src/Worker/index.ts",
-      "start": "nodemon src/index.ts",
+      "start": "node src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs",
       "migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/migration/threads-migration -d src/data-source.ts",
       "migration:run": "npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
