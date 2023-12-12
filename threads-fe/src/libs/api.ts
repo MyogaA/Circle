@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export const API = axios.create({
-  baseURL: "http://localhost:5002/api/v1"
+  baseURL: "https://circle-myogaa.vercel.app/api/v1"
 })
 
 export function setAuthToken(token: string  | any) {
