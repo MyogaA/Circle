@@ -5,7 +5,7 @@ export default function FormLogin() {
   const { handleChange, handleLogin } = useLogin();
 
   return (
-    <div style={{ backgroundImage: "url(../../assets/background.jpg)", backgroundSize: 'cover' }}>
+    <div >
       <Box
         display={"flex"}
         flexDirection={"column"}

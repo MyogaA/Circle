@@ -4,7 +4,7 @@ import useRegister from "../Hooks/handleRegister";
 function RegisterForm() {
   const { handleChange, handleRegister,navigate } = useRegister();
   return (
-    <div style={{ backgroundImage: "url(../../assets/background.jpg)", backgroundSize: 'cover' }}>
+    <div >
       <Box
         display={"flex"}
         flexDirection={"column"}
